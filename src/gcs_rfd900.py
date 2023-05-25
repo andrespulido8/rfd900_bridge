@@ -13,7 +13,7 @@ import actionlib_msgs.msg as alm
 import serial
 import struct
 import time
-import thread
+import _thread
 import zlib
 
 
@@ -39,13 +39,13 @@ class RFD900_GCS:
         self.read_buffer=list()
 
     def read_msg(self):
-        current_read=''
-        current_read=self.s.read(self.s.inWaiting())
-        self.serial_buffer=self.serial_buffer + current_read
-        while self.serial_buffer.find('\x04\x17\xfe') > 0:
-            data,self.serial_buffer=self.serial_buffer.split('\x04\x17\xfe',1)
+        current_read = ''
+        current_read = self.s.read(self.s.in_waiting)
+        self.serial_buffer = self.serial_buffer + current_read.decode()
+        while self.serial_buffer.find(b'\x04\x17\xfe') > 0:
+            data, self.serial_buffer = self.serial_buffer.split(b'\x04\x17\xfe', 1)
             self.read_buffer.append(data)
-            
+       
             
     def publish_tf(self,data):
         #print(self.msg_type)

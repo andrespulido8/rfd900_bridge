@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import String
-from tf2_msgs.msg import TFMessage
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import OccupancyGrid
@@ -12,9 +10,7 @@ import tf2_ros
 import struct
 import serial
 import time
-import thread
 import zlib
-import difflib
 
 class RFD900_Rover:
     def __init__(self):
